@@ -1,5 +1,9 @@
-package Picçrija;
+package PicÄ“rija;
 
 public class PicerijasKonts {
+public double nauda;
 
+	public PicerijasKonts(double nauda) {
+		this.nauda = nauda;
+	}
 }

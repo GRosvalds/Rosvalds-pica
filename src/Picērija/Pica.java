@@ -1,4 +1,4 @@
-package Picçrija;
+package PicÄ“rija;
 
 public class Pica {
 	public String nosaukums;

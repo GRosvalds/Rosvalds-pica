@@ -1,0 +1,23 @@
+[33mcommit 77ea7c7bf32e2b64f085ee046dc976e20d4dfdfd[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Gabriels Rosvalds <gabriels.rosvalds@gmail.com>
+Date:   Tue Apr 4 19:07:16 2023 +0300
+
+    Nejauši tiek izveidots klients kurš pasūta picu, tiek izvadīts šis pasūtijums, nomainīti picas objekta atribūti, iesākta picas gatavošanas daļā, kur jāveido picu, kuru klients pasūtija
+
+[33mcommit c26a54b772cf98cb42cfa7b1b9018803b07d24df[m
+Author: Gabriels Rosvalds <gabriels.rosvalds@gmail.com>
+Date:   Wed Mar 29 18:43:46 2023 +0300
+
+    Iespēja izveidot profilu un ielādēt jau esošu profilu
+
+[33mcommit f3231995654f59912fb0deb987a19bd2d5228287[m
+Author: Rosvalds <Gabriels.Rosvalds@sk.lvt.lv>
+Date:   Wed Mar 15 15:53:27 2023 +0200
+
+    Izveidots picas objekts
+
+[33mcommit 0882646556c794e97262f67a8879cdc6b68fa0db[m
+Author: Rosvalds <Gabriels.Rosvalds@sk.lvt.lv>
+Date:   Wed Mar 15 15:30:58 2023 +0200
+
+    Sāku darbu ar programu

@@ -10,9 +10,9 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 public class Picērija {
-	public static double nauda;
+
 	
-	public static void Spele() {
+	public static void Spele(int nauda) {
 		String[] jaunaIzvelne = {"Sākt strādāt", "Beigt strādāt", "Apskatīt picērijas informāciju"};
 		String izvele;
 		do {
@@ -38,14 +38,27 @@ public class Picērija {
 			   
 //			   int izmers, String merce, String pamatne, String piedevas, String siers
 			   Pica pica = new Pica(randIzmers, randMerce, randPamatne, randPiedevas, randSiers);
-			    String pasutijums = "Klients: "+randKlients+"\n pasūtija picu ar: "+
-			   randPamatne+" pamatne \nMērce: "+randMerce+" \nPiedevas: "+randPiedevas+" \nSiers: "+randSiers;
+			    String pasutijums = "Klients: "+randKlients+" \npasūtija picu ar: \nPamatne: "+randPamatne+" \nIzmers: "+randIzmers+
+			   " \nMērce: "+randMerce+" \nPiedevas: "+randPiedevas+" \nSiers: "+randSiers;
 			    
 			    JOptionPane.showMessageDialog(null, "Jūsu pasūtījums: \n"+pasutijums, "Pasūtījums", JOptionPane.INFORMATION_MESSAGE);
-			    int pIzmers = (int) JOptionPane.showInputDialog(null,"Izvēlies darbību", "Ceptuve", JOptionPane.INFORMATION_MESSAGE, null, izmers, izmers[0]);
+			    int pIzmers = (int) JOptionPane.showInputDialog(null,"Izmērs: ", "Ceptuve", JOptionPane.INFORMATION_MESSAGE, null, izmers, izmers[0]);
 			    String pPamatne;
 			    pPamatne = (String)JOptionPane.showInputDialog(null, "Pamatne: ", "Ceptuve", JOptionPane.INFORMATION_MESSAGE,null, pamatne, pamatne[0]);
-			 
+			    String pMerce = (String)JOptionPane.showInputDialog(null, "Merce: ", "Ceptuve", JOptionPane.INFORMATION_MESSAGE,null, merces, merces[0]);
+			    String pSiers = (String)JOptionPane.showInputDialog(null, "Siers: ", "Ceptuve", JOptionPane.INFORMATION_MESSAGE,null, siers, siers[0]);
+			    String pPiedevas = (String)JOptionPane.showInputDialog(null, "Piedevas: ", "Ceptuve", JOptionPane.INFORMATION_MESSAGE,null, piedevas, piedevas[0]);
+			    
+			    
+			    if(pIzmers == (int)pica.getIzmers() && pPamatne.equalsIgnoreCase(pica.getPamatne()) && pMerce.equalsIgnoreCase(pica.getMerce()) && pSiers.equalsIgnoreCase(pica.getSiers()) && pPiedevas.equalsIgnoreCase(pica.getPiedevas())) {
+			    	nauda += 20;
+			    	int tips = rand.nextInt(10)+1;
+			    	nauda +=tips;
+			    	JOptionPane.showMessageDialog(null, randKlients+" samaksāja par picu, un atstāja "+tips+" dzeramnaudu", "pasūtījums", JOptionPane.INFORMATION_MESSAGE);
+			    }
+			    else {
+			    	
+			    }
 				break;
 			case "Apskatīt picērijas informāciju":
 				
@@ -61,7 +74,8 @@ public class Picērija {
 	}
  
     public static void main(String[] args) {
-        String izvele;
+        int nauda =0;
+    	String izvele;
         String[] izvelne = {"Sakt jaunu speli", "Ieladet speli", "Iziet"};
         String[] jaunaIzvelne = {"Sākt strādāt", "Beigt strādāt", "Apskatīt picērijas informāciju"};
         do {
@@ -75,7 +89,7 @@ public class Picērija {
                 }else {
                     JOptionPane.showMessageDialog(null, "Profilu nevarēja saglabāt. Mēģini vēlreiz.");
                 }
-                Spele();
+                Spele(nauda);
                 FileWriter rakstits = new FileWriter(profilaFails);
                 rakstits.write("Profila vārds: " + profilaVards+"\nNopelnita nauda: "+nauda);
                 rakstits.close();
@@ -86,17 +100,20 @@ public class Picērija {
         }
          
         
+        
         else if(izvele.equalsIgnoreCase("Ieladet speli")) {
                 String profilaVards = JOptionPane.showInputDialog(null, "Ievadi profilu vārdu, kuru vēlies ielādēt:");
                 String profilaCeļš = System.getProperty("user.home") + "\\Desktop\\" + profilaVards + ".txt";
                 if(new File(profilaCeļš).exists()) {
                     try {
                         String saturaString = new String(Files.readAllBytes(Paths.get(profilaCeļš)));
+                        char str = saturaString.charAt(saturaString.length()-1);
+                        System.out.println(str);
                         JOptionPane.showMessageDialog(null, "Profilam " + profilaVards + " ir sekojošs saturs:\n\n" + saturaString);
                     } catch(IOException e) {
                         e.printStackTrace();
                     }
-                    Spele();
+                    Spele(nauda);
                 }else {
                     JOptionPane.showMessageDialog(null, "Nevarēja atrast profilu ar vārdu " + profilaVards + ". Mēģini vēlreiz.");
                 }

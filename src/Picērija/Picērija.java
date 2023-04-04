@@ -4,33 +4,60 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
 
 public class Picērija {
+	public static double nauda;
+	
 	public static void Spele() {
-		   String[] picasSastavdali = {"Siers", "Tomāti", "Sēnes", "Ananāsi", "Oliņas"};
-	        double[] picasCenas = {1.50, 0.75, 0.90, 1.25, 0.50};
-
-	        // Pajautā, kuru picu vēlas klienta
-	        Random rand = new Random();
-	        int randomPica = rand.nextInt(3);
-	        String izvele;
-	        switch (randomPica) {
-	            case 0:
-	                izvele = "Siers,Tomāti,Sēnes,Pamatne";
-	                break;
-	            case 1:
-	                izvele = "Siers,Ananāsi,Oliņas,Pamatne";
-	                break;
-	            case 2:
-	                izvele = "Siers,Tomāti,Sēnes,Ananāsi,Oliņas,Pamatne";
-	                break;
-	            default:
-	                JOptionPane.showMessageDialog(null, "Kļūda: Nepareiza picas izvēle");
-	                return;
-	        }
+		String[] jaunaIzvelne = {"Sākt strādāt", "Beigt strādāt", "Apskatīt picērijas informāciju"};
+		String izvele;
+		do {
+			izvele= (String)JOptionPane.showInputDialog(null, "Izvēlies darbību", "Izvēlne", JOptionPane.INFORMATION_MESSAGE, null, jaunaIzvelne, jaunaIzvelne[0]);
+			switch(izvele) {
+			case "Sākt strādāt":
+				Random rand = new Random();
+			    
+				Object[] izmers = {20, 30, 50};
+			    String[] klients = {"Pēteris", "Anna", "Samanta", "Ralfs", "Maksims", "Māris", "Matīss", "Keita", "Lidija", "Jānis", "Maikls" };
+			   String[] pamatne = {"Bieza", "Plāna"};
+			   String[] merces = {"Tomātu", "Bārbekjū", "Ķiploku", "Saldskābā"};
+			   String[] piedevas = {"Peperoni", "Sēnes", "Ananasi", "Bekons", "Vista"};
+			   String[] siers = {"Mocarellas", "Čedaras", "Parasts"};
+			   
+			   Object randIzmers = izmers[rand.nextInt(izmers.length)];
+			   String randKlients = klients[rand.nextInt(klients.length)];
+			   String randPamatne = pamatne[rand.nextInt(pamatne.length)];
+			   String randMerce = merces[rand.nextInt(merces.length)];
+			   String randPiedevas = piedevas[rand.nextInt(piedevas.length)];
+			   String randSiers = siers[rand.nextInt(siers.length)];
+			   
+			   
+//			   int izmers, String merce, String pamatne, String piedevas, String siers
+			   Pica pica = new Pica(randIzmers, randMerce, randPamatne, randPiedevas, randSiers);
+			    String pasutijums = "Klients: "+randKlients+"\n pasūtija picu ar: "+
+			   randPamatne+" pamatne \nMērce: "+randMerce+" \nPiedevas: "+randPiedevas+" \nSiers: "+randSiers;
+			    
+			    JOptionPane.showMessageDialog(null, "Jūsu pasūtījums: \n"+pasutijums, "Pasūtījums", JOptionPane.INFORMATION_MESSAGE);
+			    int pIzmers = (int) JOptionPane.showInputDialog(null,"Izvēlies darbību", "Ceptuve", JOptionPane.INFORMATION_MESSAGE, null, izmers, izmers[0]);
+			    String pPamatne;
+			    pPamatne = (String)JOptionPane.showInputDialog(null, "Pamatne: ", "Ceptuve", JOptionPane.INFORMATION_MESSAGE,null, pamatne, pamatne[0]);
+			 
+				break;
+			case "Apskatīt picērijas informāciju":
+				
+				break;
+				
+			case "Beigt strādāt":
+				
+				break;
+			}
+		}while(!izvele.equalsIgnoreCase("Beigt strādāt"));
+	    
+	
 	}
  
     public static void main(String[] args) {
@@ -48,13 +75,14 @@ public class Picērija {
                 }else {
                     JOptionPane.showMessageDialog(null, "Profilu nevarēja saglabāt. Mēģini vēlreiz.");
                 }
+                Spele();
                 FileWriter rakstits = new FileWriter(profilaFails);
-                rakstits.write("Profila vārds: " + profilaVards);
+                rakstits.write("Profila vārds: " + profilaVards+"\nNopelnita nauda: "+nauda);
                 rakstits.close();
             }catch(IOException e) {
                 e.printStackTrace();
             }
-            Spele();
+            
         }
          
         

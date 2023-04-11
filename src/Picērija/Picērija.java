@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 public class Picērija {
 
 	
-	public static void Spele(int nauda) {
+	public static int Spele(int nauda) {
 		String[] jaunaIzvelne = {"Sākt strādāt", "Beigt strādāt", "Apskatīt picērijas informāciju"};
 		String izvele;
 		do {
-			izvele= (String)JOptionPane.showInputDialog(null, "Izvēlies darbību", "Izvēlne", JOptionPane.INFORMATION_MESSAGE, null, jaunaIzvelne, jaunaIzvelne[0]);
+			izvele= (String)JOptionPane.showInputDialog(null, "Izvēlies darbību \nJūsu nauda: "+nauda, "Izvēlne", JOptionPane.INFORMATION_MESSAGE, null, jaunaIzvelne, jaunaIzvelne[0]);
 			switch(izvele) {
 			case "Sākt strādāt":
 				Random rand = new Random();
@@ -59,7 +59,9 @@ public class Picērija {
 			    else {
 			    	
 			    }
-				break;
+			    break;
+			    
+				
 			case "Apskatīt picērijas informāciju":
 				
 				break;
@@ -69,57 +71,70 @@ public class Picērija {
 				break;
 			}
 		}while(!izvele.equalsIgnoreCase("Beigt strādāt"));
+		return nauda;
 	    
 	
 	}
  
-    public static void main(String[] args) {
-        int nauda =0;
-    	String izvele;
-        String[] izvelne = {"Sakt jaunu speli", "Ieladet speli", "Iziet"};
-        String[] jaunaIzvelne = {"Sākt strādāt", "Beigt strādāt", "Apskatīt picērijas informāciju"};
-        do {
-        	izvele = (String)JOptionPane.showInputDialog(null, "Izvēlies darbību", "Izvēlne", JOptionPane.INFORMATION_MESSAGE, null, izvelne, izvelne[0]);
-        if(izvele.equalsIgnoreCase("Sakt jaunu speli")) {
-            String profilaVards = JOptionPane.showInputDialog(null, "Ievadi savu profilu vārdu:");
-            try {
-                File profilaFails = new File(System.getProperty("user.home") + "\\Desktop\\" + profilaVards + ".txt");
-                if(profilaFails.createNewFile()) {
-                    JOptionPane.showMessageDialog(null, "Profilu veiksmīgi saglabāts!");
-                }else {
-                    JOptionPane.showMessageDialog(null, "Profilu nevarēja saglabāt. Mēģini vēlreiz.");
-                }
-                Spele(nauda);
-                FileWriter rakstits = new FileWriter(profilaFails);
-                rakstits.write("Profila vārds: " + profilaVards+"\nNopelnita nauda: "+nauda);
-                rakstits.close();
-            }catch(IOException e) {
-                e.printStackTrace();
-            }
-            
-        }
-         
-        
-        
-        else if(izvele.equalsIgnoreCase("Ieladet speli")) {
-                String profilaVards = JOptionPane.showInputDialog(null, "Ievadi profilu vārdu, kuru vēlies ielādēt:");
-                String profilaCeļš = System.getProperty("user.home") + "\\Desktop\\" + profilaVards + ".txt";
-                if(new File(profilaCeļš).exists()) {
-                    try {
-                        String saturaString = new String(Files.readAllBytes(Paths.get(profilaCeļš)));
-                        char str = saturaString.charAt(saturaString.length()-1);
-                        System.out.println(str);
-                        JOptionPane.showMessageDialog(null, "Profilam " + profilaVards + " ir sekojošs saturs:\n\n" + saturaString);
-                    } catch(IOException e) {
-                        e.printStackTrace();
-                    }
-                    Spele(nauda);
-                }else {
-                    JOptionPane.showMessageDialog(null, "Nevarēja atrast profilu ar vārdu " + profilaVards + ". Mēģini vēlreiz.");
-                }
-            }
-        }while(!izvele.equalsIgnoreCase("Iziet"));
-    
-}
+	public static void main(String[] args) {
+	    int nauda = 0;
+	    String izvele;
+	    String[] izvelne = {"Sakt jaunu speli", "Ieladet speli", "Iziet"};
+	    String[] jaunaIzvelne = {"Sākt strādāt", "Beigt strādāt", "Apskatīt picērijas informāciju"};
+	    do {
+	        izvele = (String) JOptionPane.showInputDialog(null, "Izvēlies darbību", "Izvēlne", JOptionPane.INFORMATION_MESSAGE, null, izvelne, izvelne[0]);
+	        if (izvele.equalsIgnoreCase("Sakt jaunu speli")) {
+	            String profilaVards = JOptionPane.showInputDialog(null, "Ievadi savu profilu vārdu:");
+	            if (!profilaVards.trim().isEmpty()) {
+	                try {
+	                    File profilaFails = new File(System.getProperty("user.home") + "\\Desktop\\" + profilaVards + ".txt");
+	                    if (profilaFails.createNewFile()) {
+	                        JOptionPane.showMessageDialog(null, "Profilu veiksmīgi saglabāts!");
+	                    } else {
+	                        JOptionPane.showMessageDialog(null, "Profilu nevarēja saglabāt. Mēģini vēlreiz.");
+	                    }
+	                    nauda = Spele(nauda);
+	                    FileWriter rakstits = new FileWriter(profilaFails);
+	                    rakstits.write("Profila vārds: " + profilaVards + "\nNopelnita nauda: " + nauda);
+	                    rakstits.close();
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
+	            } else {
+	                JOptionPane.showMessageDialog(null, "Profilu vārds nevar būt tukšs!");
+	            }
+	        } else if (izvele.equalsIgnoreCase("Ieladet speli")) {
+	            String profilaVards = JOptionPane.showInputDialog(null, "Ievadi profilu vārdu, kuru vēlies ielādēt:");
+	            String profilaCeļš = System.getProperty("user.home") + "\\Desktop\\" + profilaVards + ".txt";
+	            if (new File(profilaCeļš).exists()) {
+	                try {
+	                    String saturaString = new String(Files.readAllBytes(Paths.get(profilaCeļš)));
+	                    String[] lines = saturaString.split("\n");
+	                    if (lines.length >= 2) {
+	                        String[] moneyLineParts = lines[1].split(":");
+	                      if (moneyLineParts.length >= 2) {
+	                         try {
+	                                nauda = Integer.parseInt(moneyLineParts[1].trim());
+	                            } catch (NumberFormatException e) {
+	                                e.printStackTrace();
+	                            }
+	                        }
+	                    }
+	                    
+	                    
+	                    JOptionPane.showMessageDialog(null, "Profilam " + profilaVards + " ir sekojošs saturs:\n\n" + saturaString);
+	                    Spele(nauda);
+	                    FileWriter rakstits = new FileWriter(profilaVards);
+	                    rakstits.write("Profila vārds: " + profilaVards + "\nNopelnita nauda: " + nauda);
+	                    rakstits.close();
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
+	            } else {
+	                JOptionPane.showMessageDialog(null, "Nevarēja atrast profilu ar vārdu " + profilaVards + ". Mēģini vēlreiz.");
+	            }
+	        }
+	    } while (!izvele.equalsIgnoreCase("Iziet"));
+	}
 }
  

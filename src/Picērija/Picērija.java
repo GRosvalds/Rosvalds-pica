@@ -48,18 +48,65 @@ public class Picērija {
 			    String pMerce = (String)JOptionPane.showInputDialog(null, "Merce: ", "Ceptuve", JOptionPane.INFORMATION_MESSAGE,null, merces, merces[0]);
 			    String pSiers = (String)JOptionPane.showInputDialog(null, "Siers: ", "Ceptuve", JOptionPane.INFORMATION_MESSAGE,null, siers, siers[0]);
 			    String pPiedevas = (String)JOptionPane.showInputDialog(null, "Piedevas: ", "Ceptuve", JOptionPane.INFORMATION_MESSAGE,null, piedevas, piedevas[0]);
-			    
+			    int kludas = 0;
 			    
 			    if(pIzmers == (int)pica.getIzmers() && pPamatne.equalsIgnoreCase(pica.getPamatne()) && pMerce.equalsIgnoreCase(pica.getMerce()) && pSiers.equalsIgnoreCase(pica.getSiers()) && pPiedevas.equalsIgnoreCase(pica.getPiedevas())) {
 			    	nauda += 20;
-			    	int tips = rand.nextInt(10)+1;
+			    	int tips = rand.nextInt(10)+0;
 			    	nauda +=tips;
-			    	JOptionPane.showMessageDialog(null, randKlients+" samaksāja par picu "+nauda+" euro, un atstāja "+tips+" euro dzeramnaudu", "pasūtījums", JOptionPane.INFORMATION_MESSAGE);
+			    	JOptionPane.showMessageDialog(null, randKlients+" samaksāja par picu "+20+" euro, un atstāja "+tips+" euro dzeramnaudu", "pasūtījums", JOptionPane.INFORMATION_MESSAGE);
+			    }
+			    else if(pIzmers != (int)pica.getIzmers()) {
+			    	kludas+=1;
+			    }
+			    else if(!pPamatne.equalsIgnoreCase(pica.getPamatne())) {
+			    	kludas+=1;
+			    }
+			    else if(!pMerce.equalsIgnoreCase(pica.getMerce())) {
+			    	kludas+=1;
+			    }
+			    else if(!pSiers.equalsIgnoreCase(pica.getSiers())) {
+			    	kludas+=1;
+			    }
+			    else if(!pPiedevas.equalsIgnoreCase(pica.getPiedevas())) {
+			    	kludas+=1;
+			    }
+			    else if(kludas>=2) {
+			    	JOptionPane.showMessageDialog(null, randKlients+" nesamaksāja par picu, un neatstāja dzeramnaudu, jo\npieļāvāt pārāk daudz kļūdu picas pagatavošanā!", "pasūtījums", JOptionPane.INFORMATION_MESSAGE);
+
 			    }
 			    else if(pPamatne.equalsIgnoreCase(pica.getPamatne()) && pMerce.equalsIgnoreCase(pica.getMerce()) && pSiers.equalsIgnoreCase(pica.getSiers()) && pPiedevas.equalsIgnoreCase(pica.getPiedevas())){
 			    	nauda+=20;
 			    	
-			    	JOptionPane.showMessageDialog(null, randKlients+" samaksāja par picu "+nauda+" euro, un atstāja "+0+" euro dzeramnaudu, jo\nuztaisijāt picu ar nepareizu izmēru!", "pasūtījums", JOptionPane.INFORMATION_MESSAGE);
+			    	JOptionPane.showMessageDialog(null, randKlients+" samaksāja par picu "+20+" euro, un atstāja "+0+" euro dzeramnaudu, jo\nuztaisijāt picu ar nepareizu izmēru!", "pasūtījums", JOptionPane.INFORMATION_MESSAGE);
+
+			    }
+			    else if(pIzmers == (int)pica.getIzmers() && pMerce.equalsIgnoreCase(pica.getMerce()) && pSiers.equalsIgnoreCase(pica.getSiers()) && pPiedevas.equalsIgnoreCase(pica.getPiedevas())){
+			    	nauda+=20;
+			    	int tips = rand.nextInt(7)+0;
+			    	
+			    	JOptionPane.showMessageDialog(null, randKlients+" samaksāja par picu "+20+" euro, un atstāja "+tips+" euro dzeramnaudu.\nJūs uztaisijāt picu ar nepareizu pamatni, lūdzu pievērsiet uzmanību!", "pasūtījums", JOptionPane.WARNING_MESSAGE);
+
+			    }
+			    else if(pIzmers == (int)pica.getIzmers() && pPamatne.equalsIgnoreCase(pica.getPamatne()) && pSiers.equalsIgnoreCase(pica.getSiers()) && pPiedevas.equalsIgnoreCase(pica.getPiedevas())){
+			    	nauda+=15;
+			    	
+			    	
+			    	JOptionPane.showMessageDialog(null, randKlients+" samaksāja par picu "+15+" euro, un atstāja "+0+" euro dzeramnaudu.\nJūs uztaisijāt picu ar nepareizu mērci, lūdzu pievērsiet uzmanību!", "pasūtījums", JOptionPane.WARNING_MESSAGE);
+
+			    }
+			    else if(pIzmers == (int)pica.getIzmers() && pPamatne.equalsIgnoreCase(pica.getPamatne()) &&pMerce.equalsIgnoreCase(pica.getMerce()) &&pPiedevas.equalsIgnoreCase(pica.getPiedevas())){
+			    	nauda+=10;
+			    	
+			    	
+			    	JOptionPane.showMessageDialog(null, randKlients+" samaksāja par picu "+10+" euro, un atstāja "+0+" euro dzeramnaudu.\nJūs uztaisijāt picu ar nepareizu sieru, lūdzu pievērsiet uzmanību!", "pasūtījums", JOptionPane.WARNING_MESSAGE);
+
+			    }
+			    else if(pIzmers == (int)pica.getIzmers() && pPamatne.equalsIgnoreCase(pica.getPamatne()) && pSiers.equalsIgnoreCase(pica.getSiers()) && pMerce.equalsIgnoreCase(pica.getMerce())){
+			    	nauda+=5;
+			    	
+			    	
+			    	JOptionPane.showMessageDialog(null, randKlients+" samaksāja par picu "+5+" euro, un atstāja "+0+" euro dzeramnaudu.\nJūs uztaisijāt picu ar nepareizu mērci, lūdzu pievērsiet uzmanību!", "pasūtījums", JOptionPane.WARNING_MESSAGE);
 
 			    }
 			    break;

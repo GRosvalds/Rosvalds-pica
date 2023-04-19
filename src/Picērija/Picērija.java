@@ -164,7 +164,7 @@ public class Picērija {
 	        izvele = (String) JOptionPane.showInputDialog(null, "Izvēlies darbību", "PaprikaPizza", JOptionPane.INFORMATION_MESSAGE, logo, izvelne, izvelne[0]);
 	        switch(izvele) {
 	        case "Sakt jaunu speli":
-	            String profilaVards = JOptionPane.showInputDialog(null, "Ievadi savu profilu vārdu:", "Registrācija");
+	            String profilaVards = JOptionPane.showInputDialog(null, "Ievadi savu profilu vārdu:");
 	            if (!profilaVards.trim().isEmpty()) {
 	                try {
 	                    File profilaFails = new File(System.getProperty("user.home") + "\\Desktop\\" + profilaVards + ".txt");
@@ -186,7 +186,7 @@ public class Picērija {
 	            }
 	            break;
 	        case "Ieladet speli":
-	            String profilaVards2 = JOptionPane.showInputDialog(null, "Ievadi profilu vārdu, kuru vēlies ielādēt:", "Profils");
+	            String profilaVards2 = JOptionPane.showInputDialog(null, "Ievadi profilu vārdu, kuru vēlies ielādēt:");
 	            String profilaCeļš = System.getProperty("user.home") + "\\Desktop\\" + profilaVards2 + ".txt";
 	            if (new File(profilaCeļš).exists()) {
 	                try {

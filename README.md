@@ -5,3 +5,6 @@ Programmas sākumā ir iespēja izveidot profilu, ja jau esat pirms tam spēlēj
 - [x] Izveidot README.me failā programmas aprakstu
 - [x] Iegrūzt picērijas projektu uz GitHub
 - [x] skolotāju GitHub projektam
+
+![pizza-icegif-15](https://user-images.githubusercontent.com/129828603/233178851-f485afac-7f81-412a-8e6d-b8ef9821f340.gif)
+

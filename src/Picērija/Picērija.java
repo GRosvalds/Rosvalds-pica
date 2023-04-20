@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 public class Picçrija {
 
 	
-	public static int Spele(int nauda) {
+	public static int Spele(int nauda, int level) {
 		ImageIcon logo = new ImageIcon("logo.jpg");
 		ImageIcon cheese = new ImageIcon("cheese.jpg");
 		ImageIcon souce = new ImageIcon("souce.png");
@@ -27,24 +27,46 @@ public class Picçrija {
 		int apmierKlienti = 0;
 		int neapmierKlienti = 0;
 		do {
-			izvele= (String)JOptionPane.showInputDialog(null, "Izvçlies darbîbu \nJûsu nauda: "+nauda+" euro", "PaprikaPizza", JOptionPane.INFORMATION_MESSAGE, logo, jaunaIzvelne, jaunaIzvelne[0]);
+			izvele= (String)JOptionPane.showInputDialog(null, "Izvçlies darbîbu \nJûsu nauda: "+nauda+" euro \nLimenis: "+level, "PaprikaPizza", JOptionPane.INFORMATION_MESSAGE, logo, jaunaIzvelne, jaunaIzvelne[0]);
 			switch(izvele) {
 			case "Sâkt strâdât":
 				Random rand = new Random();
 			    Klienti+=1;
+			    
 				Object[] izmers = {20, 30, 50};
 			    String[] klients = {"Pçteris", "Anna", "Samanta", "Ralfs", "Maksims", "Mâris", "Matîss", "Keita", "Lidija", "Jânis", "Maikls"};
 			   String[] pamatne = {"Bieza", "Plâna", "Ar Sieru"};
 			   String[] merces = {"Tomâtu", "Bârbekjû", "Íiploku", "Saldskâbâ", "Karija", "Asâ"};
 			   String[] piedevas = {"Peperoni", "Sçnes", "Ananasi", "Bekons", "Vista", "Maltâ gaïa"};
 			   String[] siers = {"Mocarellas", "Èedaras", "Parasts", "Kamambçras"};
-			   
+			    
 			   Object randIzmers = izmers[rand.nextInt(izmers.length)];
 			   String randKlients = klients[rand.nextInt(klients.length)];
 			   String randPamatne = pamatne[rand.nextInt(pamatne.length)];
 			   String randMerce = merces[rand.nextInt(merces.length)];
 			   String randPiedevas = piedevas[rand.nextInt(piedevas.length)];
 			   String randSiers = siers[rand.nextInt(siers.length)];
+			   
+			   if(level==2){
+				   randIzmers = izmers[rand.nextInt(izmers.length-1)];
+				   randKlients = klients[rand.nextInt(klients.length)];
+				   randPamatne = pamatne[rand.nextInt(pamatne.length-1)];
+				   randMerce = merces[rand.nextInt(merces.length-3)];
+				   randPiedevas = piedevas[rand.nextInt(piedevas.length-3)];
+				   randSiers = siers[rand.nextInt(siers.length-1)]; 
+				    
+			   }
+			   if(level==3){
+				   randIzmers = izmers[rand.nextInt(izmers.length)];
+				   randKlients = klients[rand.nextInt(klients.length)];
+				   randPamatne = pamatne[rand.nextInt(pamatne.length)];
+				   randMerce = merces[rand.nextInt(merces.length)];
+				   randPiedevas = piedevas[rand.nextInt(piedevas.length)];
+				   randSiers = siers[rand.nextInt(siers.length)]; 
+				    
+			   }
+			    
+			   
 			   
 			   
 //			   int izmers, String merce, String pamatne, String piedevas, String siers
@@ -157,6 +179,7 @@ public class Picçrija {
 		ImageIcon logo = new ImageIcon("logo.jpg");
 
 	    int nauda = 0;
+	    int level = 1;
 	    String izvele;
 	    String[] izvelne = {"Sakt jaunu speli", "Ieladet speli", "Iziet"};
 	    String[] jaunaIzvelne = {"Sâkt strâdât", "Beigt strâdât", "Apskatît picçrijas informâciju"};
@@ -171,7 +194,7 @@ public class Picçrija {
 	                    File profilaFails = new File(System.getProperty("user.home") + "\\Desktop\\" + profilaVards + ".txt");
 	                    if (profilaFails.createNewFile()) {
 	                        JOptionPane.showMessageDialog(null, "Profilu veiksmîgi saglabâts!");
-	                        nauda = Spele(nauda);
+	                        nauda = Spele(nauda, level);
 		                    FileWriter rakstits = new FileWriter(profilaFails);
 		                    rakstits.write("Profila vârds: " + profilaVards + "\nNopelnita nauda: " + nauda);
 		                    rakstits.close();
@@ -198,14 +221,16 @@ public class Picçrija {
 	                        if (moneyLineParts.length >= 2) {
 	                            try {
 	                                nauda = Integer.parseInt(moneyLineParts[1].trim());
-	                                System.out.println(nauda);
+	                              
 	                            } catch (NumberFormatException e) {
 	                                e.printStackTrace();
 	                            }
+	                            if(nauda >= 50) level=2;
+	                            if(nauda >= 100) level=3;
 	                        }
 	                    }
 	                    JOptionPane.showMessageDialog(null, "Profilam " + profilaVards2 + " ir sekojoðs saturs:\n\n" + saturaString);
-	                    nauda =Spele(nauda);
+	                    nauda =Spele(nauda, level);
 	                    System.out.println(nauda);
 	                    FileWriter rakstits = new FileWriter(profilaCeïð, false);
 	                    rakstits.write("Profila vârds: " + profilaVards2 + "\nNopelnta nauda: " + nauda);

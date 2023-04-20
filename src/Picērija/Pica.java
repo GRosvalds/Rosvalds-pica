@@ -1,4 +1,4 @@
-package PicÄ“rija;
+package Picçrija;
 
 public class Pica {
 	public Object izmers;

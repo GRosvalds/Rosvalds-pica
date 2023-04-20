@@ -187,8 +187,11 @@ public class Picçrija {
 	        izvele = (String) JOptionPane.showInputDialog(null, "Izvçlies darbîbu", "PaprikaPizza", JOptionPane.INFORMATION_MESSAGE, logo, izvelne, izvelne[0]);
 	        switch(izvele) {
 	        case "Sakt jaunu speli":
+
 	            String profilaVards = JOptionPane.showInputDialog(null, "Ievadi savu profilu vârdu:");
 	            nauda = 0;
+	            
+
 	            if (!profilaVards.trim().isEmpty()) {
 	                try {
 	                    File profilaFails = new File(System.getProperty("user.home") + "\\Desktop\\" + profilaVards + ".txt");
@@ -210,9 +213,12 @@ public class Picçrija {
 	            }
 	            break;
 	        case "Ieladet speli":
+
 	            String profilaVards2 = JOptionPane.showInputDialog(null, "Ievadi profilu vârdu, kuru vçlies ielâdçt:");
 	            String profilaCeïð = System.getProperty("user.home") + "\\Desktop\\" + profilaVards2 + ".txt";
+	          
 	            if (new File(profilaCeïð).exists()) {
+
 	                try {
 	                    String saturaString = new String(Files.readAllBytes(Paths.get(profilaCeïð)));
 	                    String[] lines = saturaString.split("\n");

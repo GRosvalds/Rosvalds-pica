@@ -40,12 +40,12 @@ public class Picçrija {
 			   String[] piedevas = {"Peperoni", "Sçnes", "Ananasi", "Bekons", "Vista", "Maltâ gaïa"};
 			   String[] siers = {"Mocarellas", "Èedaras", "Parasts", "Kamambçras"};
 			    
-			   Object randIzmers = izmers[rand.nextInt(izmers.length)];
+			   Object randIzmers = izmers[rand.nextInt(izmers.length-2)];
 			   String randKlients = klients[rand.nextInt(klients.length)];
-			   String randPamatne = pamatne[rand.nextInt(pamatne.length)];
-			   String randMerce = merces[rand.nextInt(merces.length)];
-			   String randPiedevas = piedevas[rand.nextInt(piedevas.length)];
-			   String randSiers = siers[rand.nextInt(siers.length)];
+			   String randPamatne = pamatne[rand.nextInt(pamatne.length-1)];
+			   String randMerce = merces[rand.nextInt(merces.length-4)];
+			   String randPiedevas = piedevas[rand.nextInt(piedevas.length-4)];
+			   String randSiers = siers[rand.nextInt(siers.length-2)];
 			   
 			   if(level==2){
 				   randIzmers = izmers[rand.nextInt(izmers.length-1)];
